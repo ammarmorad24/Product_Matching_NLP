@@ -1,68 +1,57 @@
-# Product_Matching_NLP
+# Product Matching Solution 🚀
 
-Welcome to the Product Matching solution for the pharmaceutical marketplace! This repository contains the code, insights, and evaluation report for our machine learning approach that leverages XGBoost to accurately match product names even in the presence of naming variations, OCR errors, and minor spelling mistakes. 🥳
+This repository contains a product matching model designed for a pharmaceutical marketplace. The solution leverages an XGBoost-based approach to accurately match product names against a master file. Here’s everything you need to know about running and understanding the model.
 
-## Overview 📖
+---
 
-This project addresses the challenge of matching products from different sources by extracting key features like the product name, dosage form, concentration, and price. The primary goal is to assign a unique SKU to each product, ensuring seamless integration with seller inventories and enhancing the overall user experience.
+## System Requirements & Environment 🖥️💾
 
-### Competition Requirements
+- **Hardware:**  
+  - **RAM:** At least 3GB for training.  
+  - **CPU:** A good CPU is required as the model takes advantage of thread parallelism for faster computations.
+  
+- **Environment:**  
+  - It is **highly recommended** to run this model in a **Conda environment** to ensure all dependencies and configurations are managed seamlessly.  
+  - **Linux Operating System** is also preferable ... it supports **High Performance of the Model**
 
-- Generate a similarity score between 0 and 1 (or 0% to 100%) for each pair of product names.
-- Be robust against minor errors and variations in product names.
-- Achieve at least 90% accuracy when tested against the master file.
-- Execute the matching process on a CPU within 500ms per pair.
-- Provide a confidence level along with the similarity score.
+---
 
-## Approach & Methodology 🛠️
+## Features & Model Overview 🔍📊
 
-### Data Ingestion & Preprocessing
+- **Key Features:**  
+The model pairs products in two distinct ways. Initially, it generates positive pairs by matching items from the master file with seller listings that share the same SKU, then, it forms negative pairs by associating a product with unrelated items.
 
-- Imported product data from various sources.
-- Cleaned and normalized product names to reduce noise (e.g., handling OCR errors like "Ibuprofn" vs. "Ibuprofen").
-- Extracted key features such as product name, dosage form, concentration, and price.
+For each pair, a comprehensive set of features is extracted:
 
-### Feature Engineering
+- **Fuzzy Matching Scores:** Utilizing tools such as `fuzz.ratio` and `fuzz.token_set_ratio`, the model assesses initial similarity, comparable to evaluating different renditions of the same narrative.
+- **Token Overlap:** This feature quantifies the number of shared words between the two texts, akin to identifying recurring themes across different stories.
+- **TF-IDF Cosine Similarity:** By vectorizing the text and calculating the cosine similarity, this feature captures the deeper semantic meaning, much like understanding the tone and style of a text.
+  
+- **Model Essentials:**  
+  - **Algorithm:** I used two functions as suggestions for the solution **logistic** and **rank:pairwise** and from observations ... I noticed that the **rank:pairwise** achieves better understanding of the problem
+  - **Thread Parallelism:** Leverages multi-threading to speed up training and prediction processes.
 
-- Transformed raw text data into a structured format.
-- Applied text normalization techniques and vectorized textual features for the XGBoost model.
-- Incorporated domain-specific knowledge (e.g., typical dosage forms) to enhance feature quality.
+- **Scoring Pattern:**  
+  The model outputs a similarity score that reflects the confidence in a product match:  
+  - **Score ≥ 0.9:** Highly confident and correct match. ✅  
+  - **Score between 0.7 and 0.9:** Mildly confident; although it generally indicates a correct match, it may require further assurance. ⚠️  
+  - **Score < 0.7:** The product is either not present in the master file or represents a weak match. ❌
 
-### Model Training with XGBoost
+---
 
-- Utilized the XGBoost algorithm for its efficiency and performance on structured data.
-- Tuned hyperparameters to balance accuracy and speed, ensuring inference within the 500ms requirement.
-- Calculated a similarity score between product name pairs, along with a confidence level.
+## Room for Improvement & Future Directions 🔄🧠
 
-### Evaluation & Reporting
+- **Neural Network Transformation:**  
+  - A potential improvement would be to convert this model into a neural network. According to the paper [Model Compression by Bucila et al.](https://www.researchgate.net/publication/221653840_Model_compression) , such an approach can capture more nuanced patterns in textual data, potentially boosting performance.
+  
+- **Feature Enhancement with Hamming Distance:**  
+  - Another avenue to explore is incorporating **Hamming Distance** as an additional feature to better capture similarities in character-level representations of product names.
 
-- Evaluated the model against a master file, achieving over 90% accuracy.
-- Analyzed performance metrics and iterated on feature engineering to refine results.
-- Prepared detailed experimental reports and visualizations to track model performance and error cases.
-
-## Insights & Key Findings 🌟
-
-- **Robustness**: The XGBoost model demonstrated strong resilience against minor spelling and OCR errors, making it an excellent choice for noisy product data.
-- **Feature Importance**: Feature engineering was critical—accurate extraction and representation of product attributes greatly influenced the model’s performance.
-- **CPU Efficiency**: The solution is optimized for CPU-based execution, ensuring low latency (<500ms) per prediction.
-- **Scalability**: The approach can be extended to incorporate additional product features and even multi-language support in future iterations.
-
-## Improvements & Future Work 🔄
-
-- **Enhanced Text Similarity**: Incorporate deep learning models such as Siamese networks for more nuanced text comparison.
-- **Automated Feature Extraction**: Use natural language processing (NLP) techniques to automatically extract and weigh product attributes.
-- **Hyperparameter Optimization**: Further fine-tune XGBoost parameters or explore ensemble methods for even better performance.
-- **User Feedback Integration**: Use real-world feedback to continuously improve the matching accuracy and update the model accordingly.
+---
 
 ## How to Run the Code 🏃‍♂️
 
-
-### Data Preparation
-
-Place your input data files in the `/data` directory. Ensure that the master file and product sheets are correctly formatted as per the submission instructions.
-
-### Running the Notebook
-
-Open the `final-xgboost-solution.ipynb` in Jupyter Notebook or any compatible environment and execute the cells sequentially to reproduce the results.
-
-
+- **Execution Instructions:**  
+  - Simply follow the detailed instructions provided in the `final-xgboost-solution.ipynb` Notebook. The notebook is designed as a **journal-like** guide that walks you through every step of the process from data ingestion to prediction.
+  - to test and load models for fast evaluation just read the first of the notebook and then scroll down run the matching function first then the loaded models after initializing everything at the beginning of the notebook
+  - Open the notebook in your preferred Jupyter environment and execute the cells sequentially.
