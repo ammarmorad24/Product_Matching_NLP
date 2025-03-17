@@ -59,6 +59,6 @@ For each pair, a comprehensive set of features is extracted:
 ## How to Run the Code 🏃‍♂️
 
 - **Execution Instructions:**  
-  - Simply follow the detailed instructions provided in the `final-xgboost-solution.ipynb` Notebook. The notebook is designed as a **journal-like** guide that walks you through every step of the process from data ingestion to prediction.
+  - Simply follow the detailed instructions provided in the `XGBoost_Solution.ipynb` Notebook. The notebook is designed as a **journal-like** guide that walks you through every step of the process from data ingestion to prediction.
   - to test and load models for fast evaluation just read the first of the notebook and then scroll down run the matching function first then the loaded models after initializing everything at the beginning of the notebook
   - Open the notebook in your preferred Jupyter environment and execute the cells sequentially.
