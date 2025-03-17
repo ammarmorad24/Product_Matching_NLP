@@ -39,6 +39,13 @@ For each pair, a comprehensive set of features is extracted:
 
 ---
 
+## [NEW] Additional Model: Bayesian Classifier Approach 📊
+
+- **Alternative Solution:**
+  - A Bayesian Classifier model has been implemented as an alternative approach, achieving approximately 96% accuracy.
+  - The implementation details and evaluation metrics can be found in the `Bayesian_Solution.ipynb` notebook.
+  - This probabilistic approach offers a complementary perspective to the XGBoost solution, potentially useful for ensemble methods or comparative analysis.
+
 ## Room for Improvement & Future Directions 🔄🧠
 
 - **Neural Network Transformation:**  
